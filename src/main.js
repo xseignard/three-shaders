@@ -36,7 +36,7 @@ const light = new THREE.AmbientLight(0x888888);
 scene.add(light);
 
 // geomertry
-const g = new THREE.BoxGeometry(1, 1, 30, 1, 1, 60);
+const g = new THREE.BoxGeometry(1, 1, 300, 1, 1, 60);
 const m = new THREE.ShaderMaterial({
 	uniforms: {
 		count: { value: 0.0 },
@@ -44,9 +44,19 @@ const m = new THREE.ShaderMaterial({
 	vertexShader: vertex,
 	fragmentShader: fragment,
 });
-const mesh = new THREE.Mesh(g, m);
-scene.add(mesh);
-mesh.position.z = 15;
+// const mesh = new THREE.Mesh(g, m);
+// scene.add(mesh);
+// mesh.position.z = 15;
+
+let y = 0;
+for (let i = 0; i < 100; i++) {
+	const mesh = new THREE.Mesh(g, m);
+	let x = 0;
+	if (i % 2 === 0) x = 15;
+	mesh.position.set(x, i * 10, 0);
+	mesh.rotation.y = Math.PI / 2;
+	scene.add(mesh);
+}
 
 const handleResize = () => {
 	camera.aspect = window.innerWidth / window.innerHeight;
